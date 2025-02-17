@@ -15,9 +15,11 @@ public class Start extends JPanel {
     JPanel startPanel;
     JLabel startLabel;
     String username = null;
-    int n = 0;
+    int n;
 
     Start(){
+        n = 0;
+
         //creates frame
         frame=new JFrame();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -240,7 +242,7 @@ public class Start extends JPanel {
         rpsLabel.setSize(800, 600);
 
         //instantiation a rock paper scissors object
-        Rps rockPaperScissors = new Rps(frame, rpsLabel, rpsPanel, rounds, u);
+        Rps rockPaperScissors = new Rps(frame, rpsLabel, rpsPanel, rounds, u, startPanel);
     }
 }
 

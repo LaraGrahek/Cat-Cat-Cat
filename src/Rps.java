@@ -16,23 +16,32 @@ public class Rps {
     JFrame frame;
     JLabel label;
     JPanel panel;
+    JPanel rPanel;
+    JLabel rLabel;
     String username;
     int rounds;
-    int user = -1;
-    int computer = -1;
+    int points;
+    int user;
+    int computer;
     JLabel result;
-    Rps(JFrame fram, JLabel rpsLabel, JPanel rpsPanel, int n, String t){
+    JPanel startPanel;
+    Rps(JFrame fram, JLabel rpsLabel, JPanel rpsPanel, int n, String t, JPanel p){
+        user = -1;
+        computer = -1;
+        points = 0;
+
         frame = fram;
         label = rpsLabel;
         panel = rpsPanel;
         username = t;
         rounds = n;
+        startPanel = p;
 
         //put number of rounds in corner
-        JPanel rPanel = new JPanel();
+        rPanel = new JPanel();
         rPanel.setBounds(600,0,200,70);
         rPanel.setLayout(null);
-        JLabel rLabel = new JLabel();
+        rLabel = new JLabel();
         rLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         rLabel.setSize(200,70);
         rPanel.add(rLabel);
@@ -60,15 +69,12 @@ public class Rps {
         System.out.println("ow");
         rLabel.setText("rounds left: " + Integer.toString(rounds));
 
-        //generates random number from 1-3, the number correspond with rock, paper, and scissors
-        int randNum = ThreadLocalRandom.current().nextInt(1, 4);
-
         //rock, paper, or scissors are clicked
         rock.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selection(1, true);
                 System.out.println("between");
-                selection(randNum, false);
+                selection(ThreadLocalRandom.current().nextInt(1, 4), false);
             }
         });
         paper.addActionListener(new ActionListener() {
@@ -76,14 +82,14 @@ public class Rps {
                 label.setVisible(false);
                 selection(2, true);
                 System.out.println("between");
-                selection(randNum, false);
+                selection(ThreadLocalRandom.current().nextInt(1, 4), false);
             }
         });
         scissors.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selection(3, true);
                 System.out.println("between");
-                selection(randNum, false);
+                selection(ThreadLocalRandom.current().nextInt(1, 4), false);
             }
         });
     }
@@ -115,7 +121,7 @@ public class Rps {
             continueBut.setBounds(50,100,100,100);
             result.add(continueBut);
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -125,14 +131,27 @@ public class Rps {
                 result.setIcon(showImage("tiez.png",300,150));
             } else if ((user == 1 && computer == 2) || (user == 2 && computer == 3) || (user == 3 && computer == 1)){
                 result.setIcon(showImage("losez.png",300,150));
+                points -= 1;
             } else{
                 result.setIcon(showImage("winz.png",300,150));
+                points+=1;
             }
             continueBut.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     user = -1;
                     computer = -1;
                     rounds--;
+                    if (rounds == 0){
+                        rPanel.setVisible(false);
+                        panel.setVisible(false);
+                        End endscreen = new End(frame, username, points, startPanel);
+                    }
+                    else {
+                        rLabel.setText("rounds left: " + Integer.toString(rounds));
+                        label.setVisible(true);
+                        result.setVisible(false);
+                        decision.setVisible(false);
+                    }
                 }
             });
         }
