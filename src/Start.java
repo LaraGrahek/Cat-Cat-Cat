@@ -30,22 +30,18 @@ public class Start extends JPanel {
         startPanel.setLayout(null);
         startPanel.setSize(800,600);
         //creates and adds the start background
-        ImageIcon image=new ImageIcon(getClass().getResource("bg.png"));
-        Image pic = image.getImage();
-        Image newPic = pic.getScaledInstance(800, 600,Image.SCALE_DEFAULT);
-        image = new ImageIcon(newPic);
-        startLabel=new JLabel(image);
+        startLabel=new JLabel(showImage("bg1.png",800,600));
         startLabel.setSize(800,600);
         startLabel.setLayout(null);
         startPanel.add(startLabel);
         //creates and adds start button
-        JButton play=new JButton(new ImageIcon(getClass().getResource("IMG_7154.GIF")));
+        JButton play=new JButton(showImage("play1.jpg",272,111));
         setButton(play);
-        play.setBounds(256,230,287,111);
+        play.setBounds(256,300,272,111);
         //creates and adds how to play button
-        JButton howTo=new JButton(new ImageIcon(getClass().getResource("IMG_7155.GIF")));
+        JButton howTo=new JButton(showImage("instr1.jpg",309,89));
         setButton(howTo);
-        howTo.setBounds(148,350,504,123);
+        howTo.setBounds(235,430,309,89);
         startLabel.add(play);
         startLabel.add(howTo);
         frame.add(startPanel);
@@ -75,10 +71,10 @@ public class Start extends JPanel {
         button.setOpaque(false);
     }
 
-    private ImageIcon showImage(String image){
+    private ImageIcon showImage(String image, int w, int h){
         ImageIcon pic = new ImageIcon(getClass().getResource(image));
         Image newPic = pic.getImage();
-        Image newNamePic = newPic.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
+        Image newNamePic = newPic.getScaledInstance(w, h, Image.SCALE_DEFAULT);
         return new ImageIcon(newNamePic);
     }
 
@@ -92,19 +88,19 @@ public class Start extends JPanel {
         namePanel.setLayout(null);
 
         //makes background and confirm button
-        JLabel nameLabel = new JLabel(showImage("bg.png"));
+        JLabel nameLabel = new JLabel(showImage("choose1.PNG",800,600));
         nameLabel.setSize(800, 600);
-        JButton butt =new JButton(new ImageIcon(getClass().getResource("IMG_7154.GIF")));
+        JButton butt =new JButton(showImage("next1.jpg",170,73));
         setButton(butt);
-        butt.setBounds(300,490,200,50);
+        butt.setBounds(600,500,170,73);
 
         //makes character select buttons
-        JButton leftBut = new JButton(new ImageIcon(getClass().getResource("arrowLef.png")));
-        JButton rightBut = new JButton(new ImageIcon(getClass().getResource("arrowRigh.png")));
+        JButton leftBut = new JButton(showImage("left1.jpg",73,107));
+        JButton rightBut = new JButton(showImage("right1.jpg",72,106));
         setButton(leftBut);
         setButton(rightBut);
-        leftBut.setBounds(200,200,90,100);
-        rightBut.setBounds(500,200,70,100);
+        leftBut.setBounds(170,200,73,107);
+        rightBut.setBounds(555,200,72,106);
 
         //adds everything to name panel
         namePanel.add(leftBut);
@@ -114,11 +110,11 @@ public class Start extends JPanel {
 
         //character select
         JPanel charPanel = new JPanel();
-        charPanel.setBounds(300,30,190,350);
+        charPanel.setBounds(257,70,285,415);
         charPanel.setLayout(null);
-        String[] cats = {"kiki.png","brown.png","greay.png","green.png"};
-        JLabel charLabel = new JLabel(showImage(cats[n]));
-        charLabel.setBounds(0,0,150,300);
+        String[] cats = {"kiki1.jpg","rosy1.jpg","keisha1.jpg","coco1.jpg"};
+        JLabel charLabel = new JLabel(showImage(cats[n],285,415));
+        charLabel.setBounds(0,0,285,415);
         charPanel.add(charLabel);
         leftBut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -126,7 +122,7 @@ public class Start extends JPanel {
                 if (n < 0){
                     n = 3;
                 }
-                charLabel.setIcon(showImage(cats[n]));
+                charLabel.setIcon(showImage(cats[n],285,415));
             }
         });
         rightBut.addActionListener(new ActionListener() {
@@ -135,16 +131,16 @@ public class Start extends JPanel {
                 if (n > 3){
                     n = 0;
                 }
-                charLabel.setIcon(showImage(cats[n]));
+                charLabel.setIcon(showImage(cats[n],285,415));
             }
         });
 
         //username input
         JPanel textPanel = new JPanel();
-        textPanel.setBounds(200,400,350,75);
+        textPanel.setBounds(260,510,280,40);
         textPanel.setLayout(null);
         JTextField inputField = new JTextField(15);
-        inputField.setBounds(20,10,300,50);
+        inputField.setBounds(0,0,280,40);
         inputField.setFont(new Font("SansSerif", Font.BOLD, 20));
         textPanel.add(inputField);
 
@@ -168,19 +164,19 @@ public class Start extends JPanel {
                 JPanel roundsPanel = new JPanel();
                 roundsPanel.setBounds(0,0,800,600);
                 roundsPanel.setLayout(null);
-                JButton three = new JButton(new ImageIcon(getClass().getResource("three.png")));
-                JButton five = new JButton(new ImageIcon(getClass().getResource("five.png")));
-                JButton seven = new JButton(new ImageIcon(getClass().getResource("seven.png")));
+                JButton three = new JButton(showImage("three1.jpg",162,183));
+                JButton five = new JButton(showImage("five1.jpg",162,183));
+                JButton seven = new JButton(showImage("seven1.jpg",162,183));
                 setButton(three);
                 setButton(five);
                 setButton(seven);
-                three.setBounds(100,400,90,90);
-                five.setBounds(300,400,90,90);
-                seven.setBounds(500,400,90,90);
+                three.setBounds(100,350,162,183);
+                five.setBounds(300,350,162,183);
+                seven.setBounds(500,350,162,183);
                 roundsPanel.add(three);
                 roundsPanel.add(five);
                 roundsPanel.add(seven);
-                JLabel roundLabel = new JLabel(showImage("arrowRigh.png"));
+                JLabel roundLabel = new JLabel(showImage("rounds1.png",800,600));
                 roundLabel.setBounds(0,0,800,600);
                 roundsPanel.add(roundLabel);
                 frame.add(roundsPanel);
@@ -210,9 +206,9 @@ public class Start extends JPanel {
         //dialog pop up with different panel and an image on it that is the instructions
         JPanel instructionPanel=new JPanel(new FlowLayout());
         JDialog instructionDialog = new JDialog(frame, "How To Play", false);
-        instructionDialog.setPreferredSize(new Dimension(450, 260)); //size of dialog
+        instructionDialog.setPreferredSize(new Dimension(368, 618)); //size of dialog
         instructionDialog.setLayout(new BorderLayout());
-        JLabel label=new JLabel(showImage("bg.png"));
+        JLabel label=new JLabel(showImage("howto1.png",368,618));
         instructionPanel.add(label);
         instructionDialog.add(instructionPanel, BorderLayout.CENTER);
         instructionDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -230,13 +226,13 @@ public class Start extends JPanel {
         //set the rock paper scissors background
         JLabel rpsLabel = new JLabel();
         switch (n){
-            case 0: rpsLabel.setIcon(showImage("kikBg.png"));
+            case 0: rpsLabel.setIcon(showImage("bgkiki.png",800,600 ));
                 break;
-            case 1: rpsLabel.setIcon(showImage("brownBg.png"));
+            case 1: rpsLabel.setIcon(showImage("bgrosy.png",800,600));
                 break;
-            case 2: rpsLabel.setIcon(showImage("greyBg.png"));
+            case 2: rpsLabel.setIcon(showImage("bgkeisha.png",800,600));
                 break;
-            case 3: rpsLabel.setIcon(showImage("greenBg.png"));
+            case 3: rpsLabel.setIcon(showImage("bgcoco.png",800,600));
                 break;
         }
         rpsLabel.setSize(800, 600);

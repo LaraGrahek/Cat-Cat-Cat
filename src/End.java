@@ -32,11 +32,12 @@ public class End {
         endPanel = new JPanel();
         endPanel.setBounds(0,0,800,600);
         endPanel.setLayout(null);
-        ImageIcon pic = new ImageIcon(getClass().getResource("startbut.png"));
+        ImageIcon pic = new ImageIcon(getClass().getResource("leaderboard2.png"));
         Image newPic = pic.getImage();
         Image newNamePic = newPic.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
         pic = new ImageIcon(newNamePic);
         endLabel = new JLabel(pic);
+        endLabel.setBounds(0,0,800,600);
 
         JLabel resultLabel = new JLabel(username+":  "+points+" pts");
         resultLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -58,7 +59,7 @@ public class End {
         nameLabel.setBounds(250,300,100,150);
         JLabel pointLabel = new JLabel("p", SwingConstants.CENTER);
         pointLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-        pointLabel.setBounds(400,300,50,150);
+        pointLabel.setBounds(400,300,100,150);
 
         StringBuilder nameText = new StringBuilder("<html>");
         StringBuilder pointText = new StringBuilder("<html>");
