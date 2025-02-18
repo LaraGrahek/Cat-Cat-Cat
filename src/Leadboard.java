@@ -1,15 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 //import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-public class End {
+
+public class Leadboard {
     JFrame frame;
     JPanel endPanel;
     JLabel endLabel;
@@ -19,7 +16,7 @@ public class End {
     int points;
     int place;
     JPanel startPanel;
-    End(JFrame f, String s, int p, JPanel c){
+    Leadboard(JFrame f, String s, int p, JPanel c){
         frame = f;
         username = s;
         points = p;
@@ -43,8 +40,12 @@ public class End {
         resultLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
         resultLabel.setBounds(300,50,250,90);
 
-        JButton restart = new JButton(new ImageIcon(getClass().getResource("bg.png")));
-        restart.setBounds(400, 100, 100, 75);
+        ImageIcon pc = new ImageIcon(getClass().getResource("home1.jpg"));
+        Image newPc = pc.getImage();
+        Image newNamePc = newPc.getScaledInstance(168, 97, Image.SCALE_DEFAULT);
+        pc = new ImageIcon(newNamePc);
+        JButton restart = new JButton(pc);
+        restart.setBounds(600, 200, 168, 97);
         endPanel.add(restart);
 
         restart.addActionListener(new ActionListener() {
@@ -87,7 +88,6 @@ public class End {
         catch (IOException i){
             System.out.print("error "+i);
         }
-        System.out.println(place);
 
         //the player got on the leaderboard/is in the top 5
         if (place != -1) {
@@ -113,7 +113,7 @@ public class End {
                 }
                 file.close();
 
-                // write the new string with the replaced line OVER the same file
+                //write new string with replaced line over the same file
                 FileOutputStream fileOut = new FileOutputStream("Leaderboard");
                 fileOut.write(inputBuffer.toString().getBytes());
                 fileOut.close();

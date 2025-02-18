@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.*;
 //import javax.swing.JButton;
@@ -10,14 +8,14 @@ import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Start extends JPanel {
+public class Home extends Game {
     JFrame frame;
     JPanel startPanel;
     JLabel startLabel;
     String username = null;
     int n;
 
-    Start(){
+    Home(){
         n = 0;
 
         //creates frame
@@ -62,21 +60,6 @@ public class Start extends JPanel {
         });
     }
 
-    //sets buttons in constructor
-    private void setButton(JButton button) {
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-    }
-
-    private ImageIcon showImage(String image, int w, int h){
-        ImageIcon pic = new ImageIcon(getClass().getResource(image));
-        Image newPic = pic.getImage();
-        Image newNamePic = newPic.getScaledInstance(w, h, Image.SCALE_DEFAULT);
-        return new ImageIcon(newNamePic);
-    }
 
     //goes through username entering then starts rock paper scissors game
     public void startGame() {
@@ -92,7 +75,7 @@ public class Start extends JPanel {
         nameLabel.setSize(800, 600);
         JButton butt =new JButton(showImage("next1.jpg",170,73));
         setButton(butt);
-        butt.setBounds(600,500,170,73);
+        butt.setBounds(600,450,170,73);
 
         //makes character select buttons
         JButton leftBut = new JButton(showImage("left1.jpg",73,107));

@@ -12,9 +12,11 @@ import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Rps {
+public class Rps extends Game {
     JFrame frame;
     JLabel label;
+    JLabel usernameLabel;
+    JLabel compcatLabel;
     JPanel panel;
     JPanel rPanel;
     JPanel pPanel;
@@ -67,11 +69,24 @@ public class Rps {
 
         //label for results of each round (win, tie, or loss)
         result = new JLabel();
-        result.setBounds(260,0,280,200);
+        result.setBounds(260,-50,280,350);
         result.setLayout(null);
         result.setOpaque(false);
         panel.add(result);
         result.setVisible(false);
+
+        //username is in the corner
+        usernameLabel = new JLabel(username,SwingConstants.CENTER);
+        usernameLabel.setFont(new Font("SansSerif", Font.BOLD, 25));
+        usernameLabel.setBounds(10,10,120,70);
+        usernameLabel.setOpaque(true);
+        panel.add(usernameLabel);
+        //computer cat is the corner
+        compcatLabel = new JLabel("computer cat",SwingConstants.CENTER);
+        compcatLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        compcatLabel.setBounds(570,10,200,70);
+        compcatLabel.setOpaque(true);
+        panel.add(compcatLabel);
 
         playerdec = new JLabel();
         compdec = new JLabel();
@@ -81,12 +96,15 @@ public class Rps {
         JButton rock = new JButton(showImage("rock1.jpg",131,129));
         rock.setBounds(250, 400, 131, 129);
         label.add(rock);
+        setButton(rock);
         JButton paper = new JButton(showImage("paper1.jpg",130,128));
         paper.setBounds(430, 400, 130, 128);
         label.add(paper);
+        setButton(paper);
         JButton scissors = new JButton(showImage("scissors1.jpg",131,128));
         scissors.setBounds(600, 400, 131, 128);
         label.add(scissors);
+        setButton(scissors);
 
         //rock, paper, or scissors are clicked
         rock.addActionListener(new ActionListener() {
@@ -120,6 +138,7 @@ public class Rps {
             decision.setIcon(showImage("actualsciss.png",400,600));
         }
         if (player){
+
             decision.setBounds(0,0,400,600);
             user = n;
         } else {
@@ -131,33 +150,33 @@ public class Rps {
         label.setVisible(false);
         decision.setVisible(true);
 
-        if (!(user == -1 || computer == -1)){
+        if (!(user == -1 || computer == -1)) {
+            JButton continueBut = new JButton (showImage("continue1.jpg",167,74));
+            continueBut.setBounds(40,220,167,74);
+            result.add(continueBut);
             result.setVisible(true);
-            if (user == computer){
-                result.setIcon(showImage("youtie.jpg",280,134));
-            } else if ((user == 1 && computer == 2) || (user == 2 && computer == 3) || (user == 3 && computer == 1)){
-                result.setIcon(showImage("youlose.jpg",280,134));
+            if (user == computer) {
+                result.setIcon(showImage("youtie.jpg", 280, 134));
+            } else if ((user == 1 && computer == 2) || (user == 2 && computer == 3) || (user == 3 && computer == 1)) {
+                result.setIcon(showImage("youlose.jpg", 280, 134));
                 points -= 1;
-            } else{
-                result.setIcon(showImage("youwin.jpg",280,134));
-                points+=1;
+            } else {
+                result.setIcon(showImage("youwin.jpg", 280, 134));
+                points += 1;
             }
-            // waits 1.5 seconds until it switches back to the other label
-            Timer timer = new Timer(1500, new ActionListener() {
-                @Override
+            continueBut.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     user = -1;
                     computer = -1;
                     rounds--;
-
-                    if (rounds == 0) { //the player has gone through all their rounds
+                    if (rounds == 0) {
                         rPanel.setVisible(false);
                         pPanel.setVisible(false);
                         panel.setVisible(false);
-                        End endscreen = new End(frame, username, points, startPanel);
-                    } else { //the player still has to finsih the rounds
-                        rLabel.setText("rounds left: " + rounds);
-                        pLabel.setText(points + " pts");
+                        Leadboard end = new Leadboard(frame, username, points, startPanel);
+                    } else {
+                        rLabel.setText("rounds left: " + Integer.toString(rounds));
+                        pLabel.setText(Integer.toString(points) + " pts");
                         label.setVisible(true);
                         rPanel.setVisible(true);
                         pPanel.setVisible(true);
@@ -170,16 +189,7 @@ public class Rps {
                     }
                 }
             });
-            timer.setRepeats(false); // Ensure it only runs once
-            timer.start(); // Start the timer
         }
-    }
-
-    private ImageIcon showImage(String image, int w, int h){
-        ImageIcon pic = new ImageIcon(getClass().getResource(image));
-        Image newPic = pic.getImage();
-        Image newNamePic = newPic.getScaledInstance(w, h, Image.SCALE_FAST);
-        return new ImageIcon(newNamePic);
     }
 
 }
